@@ -15,7 +15,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ProducerService {
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     public AwardIntervalResponseDTO getProducerAwardIntervals() {
         List<Movie> winners = movieRepository.findByWinnerTrue();
@@ -24,6 +24,7 @@ public class ProducerService {
 
         // Separando os produtores e os anos de
         for (Movie movie : winners) {
+            if(!movie.getWinner()) continue;
             String producersField = movie.getProducers();
             String[] producersSplit = producersField.split(",| and ");
 

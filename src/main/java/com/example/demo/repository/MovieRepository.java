@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    @Query("SELECT m FROM Movie m WHERE m.winner = true")
+    @Query("SELECT m FROM Movie m WHERE m.winner is true")
     List<Movie> findByWinnerTrue();
 }

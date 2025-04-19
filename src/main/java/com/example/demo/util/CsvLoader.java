@@ -31,14 +31,14 @@ public class CsvLoader {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
-                if (parts.length < 5) continue;
 
                 Movie movie = new Movie();
                 movie.setReleaseYear(Integer.parseInt(parts[0]));
                 movie.setTitle(parts[1]);
                 movie.setStudios(parts[2]);
                 movie.setProducers(parts[3]);
-                movie.setWinner("yes".equalsIgnoreCase(parts[4].trim()));
+                if (parts.length < 5) movie.setWinner(false);
+                else movie.setWinner(parts[4].trim().equals("yes"));
 
                 movieRepository.save(movie);
             }
